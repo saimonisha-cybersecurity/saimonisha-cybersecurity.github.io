@@ -15,15 +15,6 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            cyber: {
-              bg: '#0a0f1c',
-              card: '#111827',
-              border: '#1f2937',
-              cyan: '#38bdf8',
-              emerald: '#10b981',
-            }
           }
         }
       }
@@ -31,47 +22,111 @@
   </script>
   <style>
     body {
-      background-color: #0a0f1c;
+      background-color: #03060d;
       color: #e2e8f0;
+      position: relative;
+      overflow-x: hidden;
     }
-    .grid-bg {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+
+    /* Abstract Blue Light-Pipe Speed-Zoom Background */
+    .light-pipe-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 75% 25%, rgba(14, 165, 233, 0.22) 0%, rgba(2, 132, 199, 0.08) 38%, transparent 70%),
+        radial-gradient(ellipse at 20% 80%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
+        linear-gradient(180deg, #02040a 0%, #050b18 50%, #02040a 100%);
+      overflow: hidden;
     }
+
+    /* Diagonal Glowing Blue Light Streaks */
+    .light-pipe-bg::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background-image:
+        repeating-linear-gradient(
+          -28deg,
+          transparent 0px,
+          transparent 48px,
+          rgba(56, 189, 248, 0.07) 49px,
+          rgba(14, 165, 233, 0.18) 51px,
+          transparent 53px,
+          transparent 120px
+        ),
+        repeating-linear-gradient(
+          -28deg,
+          transparent 0px,
+          transparent 95px,
+          rgba(125, 211, 252, 0.12) 96px,
+          transparent 98px,
+          transparent 210px
+        );
+      filter: blur(0.4px);
+      mask-image: radial-gradient(circle at 65% 40%, black 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 65% 40%, black 25%, transparent 80%);
+    }
+
+    /* High-Speed Core Beam Accent */
+    .light-pipe-bg::after {
+      content: "";
+      position: absolute;
+      top: -10%;
+      right: -15%;
+      width: 85%;
+      height: 120%;
+      background:
+        linear-gradient(-28deg, transparent 44%, rgba(56, 189, 248, 0.14) 48%, rgba(186, 230, 253, 0.25) 49.5%, rgba(14, 165, 233, 0.12) 51%, transparent 55%),
+        linear-gradient(-28deg, transparent 58%, rgba(56, 189, 248, 0.08) 60%, rgba(56, 189, 248, 0.16) 60.8%, transparent 63%);
+      filter: blur(6px);
+      pointer-events: none;
+    }
+
+    .glass-card {
+      background: rgba(10, 17, 32, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
     .glow-card:hover {
-      border-color: rgba(56, 189, 248, 0.45);
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 0 28px rgba(14, 165, 233, 0.16);
+    }
+
+    .filter-btn.active {
+      background-color: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.5);
     }
   </style>
 </head>
-<body class="grid-bg antialiased selection:bg-sky-500/30 selection:text-sky-200">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sky-500/30 selection:text-sky-200">
+  <div class="light-pipe-bg" aria-hidden="true"></div>
 
-  <!-- Navigation -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0a0f1c]/85 border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
+  <!-- Shared Multi-Page Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#03060d]/80 border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <a href="index.html" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
         <span class="text-emerald-400">~/</span>sai-monisha<span class="animate-pulse text-sky-400">_</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#about" class="hover:text-sky-400 transition">About</a>
-        <a href="#skills" class="hover:text-sky-400 transition">Skills</a>
-        <a href="#experience" class="hover:text-sky-400 transition">Experience</a>
-        <a href="#projects" class="hover:text-sky-400 transition">Key Projects</a>
-        <a href="#education" class="hover:text-sky-400 transition">Certifications</a>
+      <nav class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="index.html" class="text-sky-400 font-semibold">About</a>
+        <a href="experience.html" class="hover:text-sky-400 transition">Experience</a>
+        <a href="projects.html" class="hover:text-sky-400 transition">Projects</a>
+        <a href="certifications.html" class="hover:text-sky-400 transition">Certifications</a>
         <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20 transition font-mono text-xs">
-          Contact Me
+          Contact
         </a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+  <main class="max-w-6xl mx-auto w-full px-6 py-16 md:py-24">
+    <!-- Hero / About Header -->
     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs mb-6">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>STATUS: OPEN TO CYBERSECURITY & SOC ROLES • TORONTO, CANADA</span>
+      <span>OPEN TO CYBERSECURITY & SOC ANALYST ROLES • TORONTO, CANADA</span>
     </div>
 
     <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
@@ -80,316 +135,72 @@
     <p class="mt-4 text-xl md:text-2xl font-mono text-slate-300">
       Cybersecurity Analyst | SOC Operations | Incident Response & Vulnerability Management
     </p>
-    <p class="mt-6 max-w-2xl text-slate-400 leading-relaxed text-base md:text-lg">
-      Cybersecurity professional with 4+ years of hands-on experience protecting enterprise and cloud infrastructures. Specialized in SIEM monitoring, threat hunting, vulnerability remediation, PKI/SSL lifecycle management, and regulatory compliance (ISO 27001, SOC 2, PCI DSS, NIST, HIPAA, GDPR).
-    </p>
 
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href="#contact" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition shadow-lg shadow-sky-500/20">
-        Get In Touch
-      </a>
-      <a href="#projects" class="px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-medium transition">
-        View Security Projects
-      </a>
-      <a href="https://github.com/saimonisha-cybersecurity" target="_blank" class="px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-mono text-sm flex items-center gap-2 transition">
-        GitHub ↗
-      </a>
+    <div class="mt-8 grid md:grid-cols-3 gap-8 items-start">
+      <div class="md:col-span-2 space-y-4 text-slate-300 leading-relaxed text-base md:text-lg">
+        <p>
+          I am a Toronto-based Cybersecurity Analyst with 4+ years of hands-on experience protecting enterprise and hybrid cloud environments. My background spans 24/7 Security Operations Center (SOC) monitoring, threat hunting, incident response, vulnerability management, and PKI/SSL lifecycle operations.
+        </p>
+        <p>
+          From tuning Splunk, Microsoft Sentinel, and IBM QRadar correlation rules to executing web penetration tests and AWS cloud hardening, I bridge proactive defense with rapid containment and audit readiness across ISO 27001, SOC 2, PCI DSS, NIST, HIPAA, and GDPR.
+        </p>
+
+        <!-- Page Navigation Buttons -->
+        <div class="pt-4 flex flex-wrap gap-3">
+          <a href="experience.html" class="px-5 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition shadow-lg shadow-sky-500/20">
+            Work Experience →
+          </a>
+          <a href="projects.html" class="px-5 py-3 rounded-lg glass-card hover:bg-slate-800/80 text-emerald-400 border border-emerald-500/30 font-semibold text-sm transition">
+            Security Projects (6) →
+          </a>
+          <a href="certifications.html" class="px-5 py-3 rounded-lg glass-card hover:bg-slate-800/80 text-sky-400 border border-sky-500/30 font-semibold text-sm transition">
+            Certifications & Education →
+          </a>
+        </div>
+      </div>
+
+      <!-- Terminal Profile Card -->
+      <div class="p-6 rounded-xl glass-card border border-slate-800 glow-card transition font-mono text-xs space-y-3">
+        <div class="text-sky-400 border-b border-slate-800 pb-2 font-semibold">$ cat profile.json</div>
+        <div><span class="text-slate-500">"location":</span> <span class="text-slate-200">"Toronto, ON, Canada"</span></div>
+        <div><span class="text-slate-500">"experience":</span> <span class="text-emerald-400">"4+ Years"</span></div>
+        <div><span class="text-slate-500">"certification":</span> <span class="text-emerald-400">"CompTIA Security+"</span></div>
+        <div><span class="text-slate-500">"focus":</span> <span class="text-slate-200">"SOC, IR, Cloud, AppSec"</span></div>
+        <div><span class="text-slate-500">"scripting":</span> <span class="text-slate-200">"Python, PowerShell, Bash"</span></div>
+        <div class="pt-2 border-t border-slate-800 flex gap-3">
+          <a href="https://github.com/saimonisha-cybersecurity" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">LinkedIn ↗</a>
+        </div>
+      </div>
     </div>
 
-    <!-- Quick Metrics Bar -->
-    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-800">
+    <!-- Quick Metrics -->
+    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="p-5 rounded-xl glass-card border border-slate-800 glow-card transition">
         <div class="font-mono text-2xl md:text-3xl font-bold text-sky-400">4+ Yrs</div>
         <div class="text-xs md:text-sm text-slate-400 mt-1">SOC & InfoSec Experience</div>
       </div>
-      <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-800">
+      <div class="p-5 rounded-xl glass-card border border-slate-800 glow-card transition">
         <div class="font-mono text-2xl md:text-3xl font-bold text-emerald-400">+45%</div>
         <div class="text-xs md:text-sm text-slate-400 mt-1">SIEM Alert Accuracy Boost</div>
       </div>
-      <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-800">
+      <div class="p-5 rounded-xl glass-card border border-slate-800 glow-card transition">
         <div class="font-mono text-2xl md:text-3xl font-bold text-sky-400">-30%</div>
         <div class="text-xs md:text-sm text-slate-400 mt-1">Security Gap Reduction</div>
       </div>
-      <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-800">
-        <div class="font-mono text-2xl md:text-3xl font-bold text-emerald-400">Sec+</div>
-        <div class="text-xs md:text-sm text-slate-400 mt-1">CompTIA Certified</div>
+      <div class="p-5 rounded-xl glass-card border border-slate-800 glow-card transition">
+        <div class="font-mono text-2xl md:text-3xl font-bold text-emerald-400">6 Labs</div>
+        <div class="text-xs md:text-sm text-slate-400 mt-1">Hands-On Security Case Studies</div>
       </div>
     </div>
-  </section>
 
-  <!-- About Section -->
-  <section id="about" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800/80">
-    <div class="flex items-center gap-3 mb-8">
-      <span class="font-mono text-sky-400 text-sm">01.</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white">About Me</h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8 items-start">
-      <div class="md:col-span-2 space-y-4 text-slate-300 leading-relaxed">
-        <p>
-          I am a Toronto-based Cybersecurity and SOC Analyst with over four years of experience defending hybrid cloud and on-premise enterprise environments. My background spans 24/7 Security Operations Center alert triage, deep-dive incident response, root cause analysis (RCA), and enterprise vulnerability management.
-        </p>
-        <p>
-          From tuning Splunk, Microsoft Sentinel, and IBM QRadar correlation rules to conducting penetration testing with Burp Suite and OWASP ZAP, I bridge the gap between proactive defense and rapid incident containment. I also bring strong governance experience executing third-party risk assessments, PKI/TLS certificate lifecycle operations, and audit readiness across ISO 27001, SOC 2, NIST, PCI DSS, HIPAA, and GDPR frameworks.
-        </p>
-      </div>
-      <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 font-mono text-xs space-y-3">
-        <div class="text-slate-400 border-b border-slate-800 pb-2 font-semibold text-sky-400">
-          $ whoami --details
-        </div>
-        <div><span class="text-slate-500">Location:</span> <span class="text-slate-200">Toronto, ON, Canada</span></div>
-        <div><span class="text-slate-500">Focus:</span> <span class="text-slate-200">SOC, IR, Cloud & Vuln Mgmt</span></div>
-        <div><span class="text-slate-500">Frameworks:</span> <span class="text-slate-200">MITRE ATT&CK, NIST, SANS</span></div>
-        <div><span class="text-slate-500">Scripting:</span> <span class="text-slate-200">Python, PowerShell, Bash, SQL</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Technical Skills Section -->
-  <section id="skills" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800/80">
-    <div class="flex items-center gap-3 mb-10">
-      <span class="font-mono text-sky-400 text-sm">02.</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white">Technical Arsenal</h2>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">SIEM, SOAR & Threat Intel</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Splunk</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Microsoft Sentinel</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">IBM QRadar</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">IBM Resilient</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">MISP</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">ThreatConnect</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">MITRE ATT&CK</span>
-        </div>
+    <!-- Technical Skills -->
+    <section id="skills" class="mt-20 pt-16 border-t border-slate-800/80">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="font-mono text-sky-400 text-sm">01.</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white">Technical Arsenal</h2>
       </div>
 
-      <!-- Card 2 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">Endpoint Security & Forensics</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">CrowdStrike Falcon</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Microsoft Defender XDR</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Carbon Black</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">SentinelOne</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Intune & SCCM</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Volatility</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">FTK Imager</span>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">Vulnerability Mgmt & Pentesting</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Tenable Nessus</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Qualys VMDR</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Rapid7 Nexpose</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Burp Suite</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">OWASP ZAP</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Metasploit</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Nmap</span>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">Cloud & Identity (IAM)</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">AWS GuardDuty</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">AWS IAM</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Azure Entra ID (AAD)</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Microsoft Purview</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Okta</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">CSPM & MFA/SSO</span>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">Network Security & Crypto</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Palo Alto Firewalls</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Cisco ASA</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Fortinet & Check Point</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">IDS/IPS & VPN</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Wireshark</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">PKI & SSL/TLS</span>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="p-6 rounded-xl bg-slate-900/60 border border-slate-800 glow-card transition">
-        <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">GRC, Compliance & Automation</h3>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">ISO 27001</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">SOC 2 & NIST</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">PCI DSS & HIPAA</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">GDPR</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Python & PowerShell</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">Bash & SQL</span>
-          <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-200">ServiceNow</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800/80">
-    <div class="flex items-center gap-3 mb-10">
-      <span class="font-mono text-sky-400 text-sm">03.</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white">Work Experience</h2>
-    </div>
-
-    <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-sky-500 before:via-slate-700 before:to-transparent">
-      
-      <!-- Role 1 -->
-      <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-        <div class="flex items-center justify-center w-10 h-10 rounded-full border border-sky-400 bg-slate-900 text-sky-400 font-mono text-xs shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow">
-          01
-        </div>
-        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-slate-900/70 border border-slate-800 glow-card transition">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <h3 class="font-bold text-lg text-white">Cyber Security Analyst</h3>
-            <span class="font-mono text-xs text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded">Sep 2022 – Apr 2025</span>
-          </div>
-          <div class="text-sm font-medium text-emerald-400 mb-4">Infosys • India</div>
-          <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-            <li>Led enterprise vulnerability assessments using Nessus, Qualys, and Rapid7 Nexpose, reducing security gaps by 30% through prioritized remediation.</li>
-            <li>Integrated and managed Microsoft Sentinel, Defender XDR, and Purview Audit for real-time threat detection, log correlation, and root cause analysis (RCA).</li>
-            <li>Configured firewall policies across Cisco ASA, Palo Alto, and Check Point, and deployed endpoint protection via Microsoft Defender and Intune.</li>
-            <li>Managed end-to-end PKI and SSL/TLS certificate lifecycles (CSR validation, issuance, renewal, and revocation).</li>
-            <li>Conducted internal and third-party vendor audits ensuring 100% compliance with ISO 27001, PCI DSS, NIST, GDPR, and HIPAA.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Role 2 -->
-      <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-        <div class="flex items-center justify-center w-10 h-10 rounded-full border border-emerald-400 bg-slate-900 text-emerald-400 font-mono text-xs shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow">
-          02
-        </div>
-        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-slate-900/70 border border-slate-800 glow-card transition">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <h3 class="font-bold text-lg text-white">System Engineer & SOC Analyst</h3>
-            <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded">Jan 2021 – Aug 2022</span>
-          </div>
-          <div class="text-sm font-medium text-sky-400 mb-4">Infosys • India</div>
-          <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-            <li>Monitored and triaged security alerts 24/7 across SIEM, IDS/IPS, firewalls, and EDR platforms within SLA targets.</li>
-            <li>Performed forensic triage and incident escalation across Azure Sentinel, Microsoft Defender ATP, Splunk, and Azure AD.</li>
-            <li>Investigated phishing campaigns using OSINT tools and executed proactive domain blocking and email filtering controls.</li>
-            <li>Conducted IOC-driven threat hunting and delivered executive incident reporting via ServiceNow and Power BI.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Key Projects & Achievements -->
-  <section id="projects" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800/80">
-    <div class="flex items-center gap-3 mb-10">
-      <span class="font-mono text-sky-400 text-sm">04.</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white">Key Security Projects & Impact</h2>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="p-6 rounded-xl bg-slate-900/70 border border-slate-800 glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="font-mono text-xs text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 rounded">SIEM & SOAR OPTIMIZATION</span>
-            <span class="font-mono text-xs text-slate-400">+45% Alert Accuracy</span>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">SOC Incident Response Optimization</h3>
-          <p class="text-sm text-slate-300 leading-relaxed mb-4">
-            Re-engineered correlation logic, tuned threshold rules, and filtered benign high-frequency service account noise across Splunk and IBM QRadar. Improved SIEM alert fidelity by 45% and streamlined incident containment playbooks to slash Mean Time to Detect (MTTD) and Respond (MTTR).
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2 font-mono text-xs text-sky-400">
-          <span>#Splunk</span>
-          <span>#QRadar</span>
-          <span>#ThreatHunting</span>
-          <span>#IncidentResponse</span>
-        </div>
-      </div>
-
-      <div class="p-6 rounded-xl bg-slate-900/70 border border-slate-800 glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="font-mono text-xs text-sky-400 border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 rounded">CLOUD ARCHITECTURE</span>
-            <span class="font-mono text-xs text-slate-400">AWS & Azure</span>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">Hybrid Cloud Security & CSPM Deployment</h3>
-          <p class="text-sm text-slate-300 leading-relaxed mb-4">
-            Architected and enforced Identity and Access Management (IAM), Multi-Factor Authentication (MFA), and Single Sign-On (SSO) across hybrid AWS and Microsoft Azure environments. Implemented Cloud Security Posture Management (CSPM) and continuous log monitoring aligned with ISO 27001 and GDPR standards.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2 font-mono text-xs text-emerald-400">
-          <span>#AWS</span>
-          <span>#AzureAD</span>
-          <span>#CSPM</span>
-          <span>#ISO27001</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education & Certifications -->
-  <section id="education" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-800/80">
-    <div class="flex items-center gap-3 mb-10">
-      <span class="font-mono text-sky-400 text-sm">05.</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white">Certifications & Education</h2>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-slate-900/70 border border-slate-800">
-        <div class="font-mono text-xs text-emerald-400 mb-2">CERTIFICATION</div>
-        <h3 class="font-bold text-white text-lg">CompTIA Security+</h3>
-        <p class="text-sm text-slate-400 mt-1">Certified Cybersecurity & Network Security Credential</p>
-      </div>
-
-      <div class="p-6 rounded-xl bg-slate-900/70 border border-slate-800">
-        <div class="font-mono text-xs text-sky-400 mb-2">CERTIFICATION</div>
-        <h3 class="font-bold text-white text-lg">Certified Data Analytics</h3>
-        <p class="text-sm text-slate-400 mt-1">SQL, Power BI, Excel & Security Data Visualization</p>
-      </div>
-
-      <div class="p-6 rounded-xl bg-slate-900/70 border border-slate-800">
-        <div class="font-mono text-xs text-sky-400 mb-2">DEGREE • 2017 – 2020</div>
-        <h3 class="font-bold text-white text-lg">Bachelor of Computer Applications (B.C.A)</h3>
-        <p class="text-sm text-slate-400 mt-1">Sri Venkateswara University, India</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="max-w-4xl mx-auto px-6 py-20 text-center border-t border-slate-800/80">
-    <span class="font-mono text-sky-400 text-sm">06. What's Next?</span>
-    <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Let's Connect</h2>
-    <p class="text-slate-400 mt-4 max-w-xl mx-auto">
-      I am actively exploring Cybersecurity Analyst, SOC Analyst, Vulnerability Management, and Cloud Security opportunities in Toronto and across Canada.
-    </p>
-
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a href="mailto:saimonishagandla91@gmail.com" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition">
-        saimonishagandla91@gmail.com
-      </a>
-      <a href="tel:+12262101437" class="px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-mono text-sm transition">
-        (226) 210-1437
-      </a>
-      <a href="https://www.linkedin.com/in/your-profile" target="_blank" class="px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-sky-400 border border-sky-500/30 font-semibold transition">
-        LinkedIn Profile ↗
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-500">
-    Built by Sai Monisha • Hosted on GitHub Pages
-  </footer>
-
-</body>
-</html>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl glass-card border border-slate-800 glow-card transition">
+          <h3 class="
