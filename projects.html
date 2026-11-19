@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sai Monisha | Cybersecurity Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0a0f1c; color: #e2e8f0; }
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    }
+    .glow-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
+    }
+    .filter-btn.active {
+      background-color: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+  </style>
+</head>
+<body class="grid-bg min-h-screen flex flex-col justify-between antialiased selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- Shared Multi-Page Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0a0f1c]/85 border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <a href="index.html" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
+        <span class="text-emerald-400">~/</span>sai-monisha<span class="animate-pulse text-sky-400">_</span>
+      </a>
+      <nav class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="index.html" class="hover:text-sky-400 transition">About</a>
+        <a href="experience.html" class="hover:text-sky-400 transition">Experience</a>
+        <a href="projects.html" class="text-sky-400 font-semibold">Projects</a>
+        <a href="certifications.html" class="hover:text-sky-400 transition">Certifications</a>
+        <a href="index.html#contact" class="px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20 transition font-mono text-xs">
+          Contact
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full px-6 py-16 flex-grow">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <span class="font-mono text-xs text-sky-400 bg-sky-500/10 border border-sky-500/30 px-3 py-1 rounded-full">
+          HANDS-ON LABS & CASE STUDIES
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold text-white mt-4">
+          Security <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">Projects</span>
+        </h1>
+        <p class="text-slate-400 mt-3 max-w-2xl">
+          Practical blue-team, cloud hardening, web penetration testing, and malware forensics labs. Click any card for full technical details.
+        </p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex flex-wrap gap-2 font-mono text-xs">
+        <button onclick="filterProjects('all', this)" class="filter-btn active cursor-pointer px-3.5 py-2 rounded-lg border border-slate-700 text-slate-300 transition">All (6)</button>
+        <button onclick="filterProjects('soc-ids', this)" class="filter-btn cursor-pointer px-3.5 py-2 rounded-lg border border-slate-700 text-slate-300 transition">SOC & IDS</button>
+        <button onclick="filterProjects('cloud-vuln', this)" class="filter-btn cursor-pointer px-3.5 py-2 rounded-lg border border-slate-700 text-slate-300 transition">Cloud & Vulns</button>
+        <button onclick="filterProjects('appsec-dfir', this)" class="filter-btn cursor-pointer px-3.5 py-2 rounded-lg border border-slate-700 text-slate-300 transition">AppSec & DFIR</button>
+      </div>
+    </div>
+
+    <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <article data-category="soc-ids" onclick="openProjectModal('snort')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded">IDS/IPS & SEGMENTATION</span>
+            <span class="font-mono text-xs text-slate-400">Snort • UFW</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">Secure Network with Snort IDS/IPS & Fail2ban</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Built a 3-VM segmented network (<span class="font-mono text-xs text-sky-300">192.168.10.0/24</span>) with Kali attacker, Ubuntu Snort/UFW gateway, and Ubuntu victim. Detected SYN floods, Hydra SSH brute force, Metasploit scans, and Slowloris, tuned alert thresholds, and auto-banned repeat SSH attackers with Fail2ban.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-sky-400">5 Custom Rules • Auto-Ban</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+      <article data-category="soc-ids" onclick="openProjectModal('splunk')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-sky-400 bg-sky-500/10 border border-sky-500/30 px-2.5 py-0.5 rounded">SIEM & THREAT HUNTING</span>
+            <span class="font-mono text-xs text-slate-400">Splunk • IR</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">Threat Hunting & Incident Response with Splunk</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Ingested Windows Security Event Logs (4625/4720), Linux syslog/auditd logs, and UFW/firewall telemetry into Splunk Enterprise. Built scheduled SPL detection alerts, webhook notifications, timeline investigations, and a full SSH brute-force IR playbook.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-emerald-400">4+ Alerts • IR Playbook</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+      <article data-category="cloud-vuln" onclick="openProjectModal('aws')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded">AWS CLOUD HARDENING</span>
+            <span class="font-mono text-xs text-slate-400">EC2 • IAM</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">Hardening an AWS Cloud Server (Amazon Linux 2023)</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Hardened a <span class="font-mono text-xs text-sky-300">t3.micro</span> EC2 instance in <span class="font-mono text-xs text-sky-300">ca-central-1</span> using SSH key-only auth, least-privilege IAM roles, CloudTrail, GuardDuty, auditd, Lynis CIS audits, and Amazon Inspector remediation.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-sky-400">Lynis 67→73 • 18/20 CVEs Fixed</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+      <article data-category="appsec-dfir" onclick="openProjectModal('juice')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-sky-400 bg-sky-500/10 border border-sky-500/30 px-2.5 py-0.5 rounded">WEB APP PENTESTING</span>
+            <span class="font-mono text-xs text-slate-400">Burp Suite</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">OWASP Juice Shop Penetration Test & Remediation</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Assessed OWASP Juice Shop using WhatWeb, Wappalyzer, and Burp Suite against OWASP WSTG v4.2. Documented 10 findings (1 Critical, 5 High, 3 Medium, 1 Low) including SQLi admin bypass, XSS, LFI, IDOR, SSRF, CSRF, and negative-quantity business logic flaws.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-emerald-400">10 Findings • CVSS v3.1</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+      <article data-category="appsec-dfir" onclick="openProjectModal('malware')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded">MALWARE ANALYSIS & DFIR</span>
+            <span class="font-mono text-xs text-slate-400">FLARE-VM</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">AsyncRAT Malware Analysis, IOCs & YARA Rule</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Performed static and dynamic analysis of <span class="font-mono text-xs text-sky-300">AsyncRAT-Sharp.exe</span> in FLARE-VM using CFF Explorer, dnSpy, Detect It Easy, PEStudio, Procmon, Regshot, and Wireshark. Extracted file/network/host IOCs and wrote a custom YARA detection rule.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-sky-400">SHA256 + YARA Verified</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+      <article data-category="cloud-vuln" onclick="openProjectModal('vulnreport')" class="cursor-pointer p-6 rounded-xl bg-slate-900/75 border border-slate-800 glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="font-mono text-[11px] text-sky-400 bg-sky-500/10 border border-sky-500/30 px-2.5 py-0.5 rounded">VULNERABILITY RISK</span>
+            <span class="font-mono text-xs text-slate-400">CVSS • SLAs</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-2">Infrastructure Vulnerability Assessment & SLA Plan</h2>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Evaluated 5 infrastructure vulnerabilities across web, application, and database servers, employee endpoints, and firewalls—prioritizing Log4Shell (CVSS 10.0) and default credentials (CVSS 9.8) into 24–48h emergency and scheduled remediation windows.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-emerald-400">5 Findings • Risk Matrix</span>
+          <span class="text-slate-300">Inspect Lab →</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="mt-12 flex flex-wrap gap-4">
+      <a href="certifications.html" class="px-5 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition">
+        Next: Certifications & Education →
+      </a>
+      <a href="index.html" class="px-5 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-sm transition">
+        ← Back to About
+      </a>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-500">
+    Sai Monisha • Cybersecurity & SOC Analyst Portfolio
+  </footer>
+
+  <!-- Project Detail Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick="closeModalOnBackdrop(event)">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 md:p-8 shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+        <div>
+          <span id="modal-badge" class="font-mono text-xs text-sky-400 bg-sky-500/10 border border-sky-500/30 px-2.5 py-1 rounded"></span>
+          <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-white mt-2"></h3>
+        </div>
+        <button onclick="hideModal()" class="cursor-pointer text-slate-400 hover:text-white font-mono text-lg px-2 py-1 rounded-lg hover:bg-slate-800 transition" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="mt-5 space-y-5 text-sm text-slate-300 leading-relaxed">
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-400 mb-1.5">Objective & Architecture</h4>
+          <p id="modal-summary"></p>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-sky-400 mb-2">Key Execution & Technical Highlights</h4>
+          <ul id="modal-highlights" class="space-y-2 list-disc list-inside text-slate-300"></ul>
+        </div>
+
+        <div id="modal-extra-box" class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs text-slate-300 space-y-1.5"></div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-400 mb-1.5">Mitigation & Outcome</h4>
+          <p id="modal-outcome"></p>
+        </div>
+
+        <div id="modal-tools" class="flex flex-wrap gap-2 pt-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const projectsData = {
+      snort: {
+        badge: 'IDS/IPS & NETWORK DEFENSE',
+        title: 'Building a Secure Network with Snort IDS/IPS & Fail2ban',
+        summary: 'Configured a segmented virtual lab on internal subnet 192.168.10.0/24 using an Attacker VM (Kali Linux, 192.168.10.10), an IDS/Firewall Gateway VM (Ubuntu Server + Snort 2.9.20 + UFW, 192.168.10.1), and a Target VM (Ubuntu Server + UFW + Fail2ban, 192.168.10.20).',
+        highlights: [
+          'Enforced UFW default deny inbound / allow outbound policies and restricted SSH (TCP/22) access on the victim host, verified via Nmap SYN (-sS) and aggressive (-A) scans.',
+          'Configured Snort with HOME_NET set to 192.168.10.0/24 and wrote custom local rules (SID 1000001–1000005) for ICMP ping, SSH brute force, MySQL connection attempts, and Slowloris.',
+          'Simulated attacks using hping3 SYN flood (--flood -p 80), Hydra SSH brute force, Metasploit auxiliary scanners (udp_sweep, tcp portscan, ssh_version, mysql_version, ssh_login), and Slowloris (150 sockets).',
+          'Fine-tuned detection rules with detection_filter (track by_src, count 6, seconds 10) to reduce alert noise and deployed Fail2ban (maxretry=3, findtime=600, bantime=600) to automatically ban attacker IP 192.168.10.10.'
+        ],
+        extra: [
+          'Topology: Kali (192.168.10.10) → Snort/UFW Gateway (192.168.10.1) → Victim (192.168.10.20)',
+          'Artifacts: local.rules, u2spewfoo /var/log/snort/snort.alert logs, fail2ban-client status sshd'
+        ],
+        outcome: 'Demonstrated defense-in-depth combining perimeter/host firewalling, signature-based IDS detection, threshold tuning to cut false positives, and automated IP blocking on repeated failed SSH logins.',
+        tools: ['Snort 2.9', 'UFW', 'Fail2ban', 'Kali Linux', 'Nmap', 'Hydra', 'Metasploit', 'hping3', 'Slowloris']
+      },
+      splunk: {
+        badge: 'SIEM DETECTION & INCIDENT RESPONSE',
+        title: 'Threat Hunting & Incident Response with Splunk',
+        summary: 'Deployed Splunk Enterprise to centralize and correlate endpoint, authentication, audit, and firewall logs across Windows and Linux hosts, building detection rules, webhook alert integrations, and a structured IR playbook.',
+        highlights: [
+          'Ingested Windows Security/System/Application event logs (including EventCode 4625 failed logons and 4720 account creation), Linux syslog (/var/log/auth.log), Linux auditd (/var/log/audit/audit.log), and UFW/firewall logs.',
+          'Created scheduled Splunk searches and alerts for SSH brute-force attempts, privilege escalation (sudo/root), suspicious file transfers/downloads (scp/wget/curl), and Windows failed logins.',
+          'Simulated attack activity using Hydra SSH brute force (195+ authentication failure events / 366 events from 192.168.87.129), sudo/su privilege escalation tests, and suspicious file transfer monitoring.',
+          'Executed a full investigation workflow—checking timelines, verifying zero successful compromise ("Accepted" / "session opened"), inspecting bash history and persistence paths, and authoring a formal SSH Brute-Force IR Playbook.'
+        ],
+        extra: [
+          'Key SPL Queries: EventCode=4625, linux_secure "Failed password", sudo/privilege escalation, [UFW BLOCK]',
+          'Playbook Phases: Detection → Investigation (no successful login confirmed) → Contain, Eradicate, Recover, Document'
+        ],
+        outcome: 'Established end-to-end SOC detection, alert triage, attack-path reconstruction, and repeatable incident response procedures for brute-force and privilege-escalation scenarios.',
+        tools: ['Splunk Enterprise', 'SPL', 'Windows Event Logs', 'Linux Syslog & auditd', 'UFW', 'Hydra', 'IR Playbook']
+      },
+      aws: {
+        badge: 'AWS CLOUD SECURITY & HARDENING',
+        title: 'Hardening an AWS Cloud Server (Amazon Linux 2023)',
+        summary: 'Provisioned and hardened an Amazon Linux 2023 EC2 instance (i-06adfb9a17328d6cf, t3.micro) in ca-central-1 following least-privilege IAM, network lockdown, continuous auditing, and cloud telemetry best practices.',
+        highlights: [
+          'Created a dedicated non-root sudo admin user, enforced SSH key-based access, disabled root SSH login and password authentication in sshd_config, and restricted Security Group SSH (port 22) ingress to a single CIDR IP (142.90.246.249/32).',
+          'Configured least-privilege IAM role (EC2-Hardening-Lab-Role) with AmazonSSMManagedInstanceCore and scoped S3 permissions, verified IMDSv2 token metadata requests, and confirmed AccessDenied on unauthorized S3 actions.',
+          'Enabled AWS CloudTrail multi-region trail (org-security-trail) logging to S3 and activated AWS GuardDuty for continuous threat monitoring.',
+          'Ran baseline and post-hardening CIS/security audits with Lynis and Amazon Inspector, patching vulnerable packages and improving the Lynis Hardening Index from 67 to 73 while resolving 18 of 20 Inspector findings.'
+        ],
+        extra: [
+          'Audit Gains: Lynis Hardening Index 67 → 73 (243 → 246 tests); Amazon Inspector 18/20 findings resolved',
+          'Controls: SSH key-only + SG single-IP lock, IAM least privilege, CloudTrail, GuardDuty, auditd'
+        ],
+        outcome: 'Reduced cloud attack surface across identity, SSH/network access, OS packages, and audit logging while producing before-and-after compliance evidence.',
+        tools: ['AWS EC2', 'IAM', 'CloudTrail', 'GuardDuty', 'Amazon Inspector', 'Lynis', 'auditd', 'Amazon Linux 2023']
+      },
+      juice: {
+        badge: 'WEB APPLICATION PENETRATION TESTING',
+        title: 'OWASP Juice Shop Penetration Test & Remediation Report',
+        summary: 'Conducted a structured web application security assessment against OWASP Juice Shop using OWASP Testing Guide v4.2 methodology, reconnaissance tools, and Burp Suite Community Edition.',
+        highlights: [
+          'Performed technology fingerprinting and endpoint enumeration with WhatWeb and Wappalyzer (Angular, Node.js/Express, jQuery).',
+          'Exploited and documented 10 findings across severity tiers (1 Critical, 5 High, 3 Medium, 1 Low): SQL Injection admin login bypass (CVSS 9.8), Reflected/Stored XSS (CVSS 8.5), Local File Inclusion (CVSS 7.5), IDOR on /rest/basket/<id> (CVSS 7.5), SSRF via /profile/image/url (CVSS 8.3), CSRF profile update (CVSS 6.5), exposed /ftp/ directory (CVSS 7.5), negative-quantity basket business logic flaw (CVSS 5.3), weak password policy (CVSS 5.3), and missing security headers (CVSS 3.7).',
+          'Provided actionable remediation guidance including parameterized queries, context-aware output encoding and CSP, object-level authorization checks, URL allow-listing, anti-CSRF tokens/SameSite cookies, directory listing restrictions, and server-side quantity/price validation.'
+        ],
+        extra: [
+          'Risk Breakdown: 1 Critical • 5 High • 3 Medium • 1 Low (Scored with CVSS v3.1)',
+          'Core Attack Vectors: SQLi Auth Bypass, XSS, LFI, IDOR, SSRF, CSRF, Exposed /ftp/, Negative Basket Qty'
+        ],
+        outcome: 'Delivered a full penetration testing report with reproduction steps, business impact analysis, CVSS v3.1 ratings, and defense-in-depth remediation steps.',
+        tools: ['Burp Suite', 'WhatWeb', 'Wappalyzer', 'OWASP WSTG v4.2', 'CVSS v3.1', 'HTTP/API Testing']
+      },
+      malware: {
+        badge: 'MALWARE ANALYSIS & DETECTION ENGINEERING',
+        title: 'AsyncRAT Malware Analysis, IOC Extraction & YARA Rule',
+        summary: 'Executed static and dynamic analysis of a .NET-based AsyncRAT sample (AsyncRAT-Sharp.exe) inside an isolated FLARE-VM sandbox to map its lifecycle, extract IOCs, and build a YARA detection rule.',
+        highlights: [
+          'Computed and verified sample hashes (MD5: 122c05c05c0c6fbaae6567709756819e, SHA-256: 47840e2a08da4c1ee1432305ce060832a4384a68514d8c0df3514b142bdd35ec) and inspected PE/NET structure using CFF Explorer, Detect It Easy, PEStudio, and dnSpy.',
+          'Identified obfuscation and evasion traits including packed/high-entropy sections, .NET/WinForms structure, minimal metadata, and external Pastebin C2 configuration retrieval (https://pastebin.com/raw/s14cUU5G) alongside connectivity checks.',
+          'Monitored runtime execution, child processes (Stub.exe), registry activity, and network traffic in FLARE-VM using Procmon, Regshot, and Wireshark, plus extracted dropped payload (stub.exe) hashes.',
+          'Authored and tested a custom YARA rule (Obfuscated_Malware_Sample) matching PE/archive/string indicators against the sample.'
+        ],
+        extra: [
+          'Sample SHA-256: 47840e2a08da4c1ee1432305ce060832a4384a68514d8c0df3514b142bdd35ec',
+          'Dropped Payload (stub.exe) SHA-256: 9f0e70c42bba961924ae681647cf9e87e360db55285d7b2da2d220fd26f0fac6'
+        ],
+        outcome: 'Translated behavioral and static malware findings into actionable file, network, and host IOCs plus a working YARA signature and EDR/egress/least-privilege mitigations.',
+        tools: ['FLARE-VM', 'YARA', 'dnSpy', 'CFF Explorer', 'Detect It Easy', 'PEStudio', 'Procmon', 'Regshot', 'Wireshark']
+      },
+      vulnreport: {
+        badge: 'VULNERABILITY MANAGEMENT & RISK',
+        title: 'Enterprise Vulnerability Assessment & Remediation Roadmap',
+        summary: 'Prioritized 5 infrastructure vulnerabilities across servers, endpoints, and network edge devices based on CVSS severity, exploitability, business impact, and remediation SLAs.',
+        highlights: [
+          'Triaged critical exposures requiring immediate 24–48 hour remediation: Apache Log4j RCE / Log4Shell (CVSS 10.0) on the Web Server and Default Administrator Credentials (CVSS 9.8) on the Application Server.',
+          'Scheduled higher- and medium-severity items across structured maintenance windows: Database Server missing OS security updates (CVSS 7.8), Employee Laptop outdated Google Chrome (CVSS 6.5), and Firewall deprecated TLS 1.0/1.1 protocols (CVSS 3.7).',
+          'Defined concrete fixes for each asset including upgrading log4j-core, enforcing 16+ character random credentials with MFA, staging DB patches, updating browsers, and restricting firewalls to TLS 1.2/1.3.'
+        ],
+        extra: [
+          'Immediate SLA (24–48h): Log4j RCE (10.0) & Default Admin Password (9.8)',
+          'Scheduled Hardening: DB OS Patching, Chrome Updates, TLS 1.2/1.3 Enforcement'
+        ],
+        outcome: 'Established a risk-driven remediation roadmap that eliminates high-impact remote/credential attack paths first while maintaining operational stability and audit compliance.',
+        tools: ['Vulnerability Management', 'CVSS Scoring', 'SLA Prioritization', 'TLS Hardening', 'Patch Management']
+      }
+    };
+
+    function filterProjects(category, btnEl) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      document.querySelectorAll('#projects-grid article').forEach(card => {
+        const matches = category === 'all' || card.dataset.category === category;
+        card.classList.toggle('hidden', !matches);
+      });
+    }
+
+    function openProjectModal(key) {
+      const data = projectsData[key];
+      if (!data) return;
+      document.getElementById('modal-badge').textContent = data.badge;
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-summary').textContent = data.summary;
+      document.getElementById('modal-outcome').textContent = data.outcome;
+      document.getElementById('modal-highlights').innerHTML = data.highlights.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('modal-extra-box').innerHTML = data.extra.map(line => `<div>▸ ${line}</div>`).join('');
+      document.getElementById('modal-tools').innerHTML = data.tools.map(t => `<span class="px-2.5 py-1 rounded bg-slate-800 text-sky-300 font-mono text-xs border border-slate-700">${t}</span>`).join('');
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function hideModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function closeModalOnBackdrop(event) {
+      if (event.target.id === 'project-modal') hideModal();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideModal();
+    });
+  </script>
+
+</body>
+</html>
