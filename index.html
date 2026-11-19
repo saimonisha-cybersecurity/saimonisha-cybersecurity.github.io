@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sai Monisha | Cybersecurity & SOC Analyst</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          }
-        }
-      }
-    }
-  </script>
   <style>
+    :root {
+      --bg-dark: #03060d;
+      --card-bg: rgba(10, 17, 32, 0.9);
+      --border-subtle: rgba(51, 65, 85, 0.75);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent-sky: #38bdf8;
+      --accent-emerald: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: #03060d;
-      color: #e2e8f0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 1.6;
       position: relative;
       overflow-x: hidden;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
     }
 
     /* Abstract Blue Light-Pipe Speed-Zoom Background */
@@ -38,6 +55,7 @@
         radial-gradient(ellipse at 20% 80%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
         linear-gradient(180deg, #02040a 0%, #050b18 50%, #02040a 100%);
       overflow: hidden;
+      pointer-events: none;
     }
 
     .light-pipe-bg::before {
@@ -81,67 +99,504 @@
       pointer-events: none;
     }
 
-    .glass-card {
-      background-color: rgba(10, 17, 32, 0.88);
-      border: 1px solid rgba(51, 65, 85, 0.75);
+    /* Explicit Icon Sizing so SVGs never blow up */
+    .icon-sm {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      min-height: 16px;
+      flex-shrink: 0;
+      fill: currentColor;
+      display: inline-block;
+    }
+
+    .container {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(3, 6, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 24px;
+    }
+
+    .brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .brand span.slash { color: var(--accent-emerald); }
+    .brand span.cursor { color: var(--accent-sky); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent-sky);
+    }
+
+    .nav-contact-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-sky);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-contact-btn:hover {
+      background: rgba(56, 189, 248, 0.24);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1 0 auto;
+      padding: 56px 0 80px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-name {
+      background: linear-gradient(90deg, #38bdf8, #10b981);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(15px, 2.2vw, 21px);
+      color: #cbd5e1;
+    }
+
+    .hero-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-copy p {
+      color: #cbd5e1;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .btn-row {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: #38bdf8;
+      color: #04101d;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      color: #e2e8f0;
+      border: 1px solid var(--border-subtle);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary.emerald {
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-secondary.sky {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      background: rgba(15, 25, 46, 0.95);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .glow-card:hover {
-      border-color: rgba(56, 189, 248, 0.6);
-      box-shadow: 0 0 28px rgba(14, 165, 233, 0.18);
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 0 28px rgba(14, 165, 233, 0.15);
     }
 
-    .skill-pill {
-      display: inline-block;
-      padding: 0.25rem 0.65rem;
-      border-radius: 0.375rem;
-      background-color: rgba(30, 41, 59, 0.9);
+    .overview-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-sky);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.65);
+    }
+
+    .overview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      padding: 6px 0;
+    }
+
+    .overview-label { color: var(--text-muted); }
+    .overview-value { color: #f1f5f9; font-weight: 500; text-align: right; }
+    .overview-value.emerald { color: #34d399; font-weight: 600; }
+
+    .overview-links {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(51, 65, 85, 0.65);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .social-link:hover { text-decoration: underline; }
+    .social-link.sky { color: #38bdf8; }
+    .social-link.emerald { color: #34d399; }
+
+    /* Metrics */
+    .metrics-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+
+    .metric-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .metric-num.sky { color: #38bdf8; }
+    .metric-num.emerald { color: #34d399; }
+    .metric-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* Sections */
+    .section-block {
+      margin-top: 72px;
+      padding-top: 56px;
+      border-top: 1px solid rgba(30, 41, 59, 0.9);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--accent-sky);
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    .skill-cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .skill-cat-title.sky { color: #38bdf8; }
+    .skill-cat-title.emerald { color: #34d399; }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      padding: 5px 11px;
+      border-radius: 6px;
+      background: rgba(30, 41, 59, 0.92);
+      border: 1px solid rgba(71, 85, 105, 0.55);
       color: #e2e8f0;
-      border: 1px solid rgba(71, 85, 105, 0.5);
-      font-size: 0.75rem;
-      line-height: 1rem;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* Contact Section */
+    .contact-center {
+      text-align: center;
+    }
+
+    .contact-center p {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 12px auto 0;
+    }
+
+    .contact-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(30, 41, 59, 0.9);
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #0b1324;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      border-radius: 8px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+    }
+
+    .modal-close:hover {
+      color: #ffffff;
+      border-color: #64748b;
+    }
+
+    .modal-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      font-size: 13px;
+      border: 1px solid #1e293b;
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+    }
+
+    .modal-link:hover {
+      border-color: #38bdf8;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sky-500/30 selection:text-sky-200">
+<body>
   <div class="light-pipe-bg" aria-hidden="true"></div>
 
-  <!-- Shared Multi-Page Navigation -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#03060d]/85 border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-      <a href="index.html" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
-        <span class="text-emerald-400">~/</span>sai-monisha<span class="animate-pulse text-sky-400">_</span>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="slash">~/</span>sai-monisha<span class="cursor">_</span>
       </a>
-      <nav class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-300">
-        <a href="index.html" class="text-sky-400 font-semibold">About</a>
-        <a href="experience.html" class="hover:text-sky-400 transition">Experience</a>
-        <a href="projects.html" class="hover:text-sky-400 transition">Projects</a>
-        <a href="certifications.html" class="hover:text-sky-400 transition">Certifications</a>
-        <button type="button" onclick="openContactModal()" class="cursor-pointer px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20 transition font-mono text-xs">
-          Contact
-        </button>
+      <nav>
+        <a href="index.html" class="active">About</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="certifications.html">Certifications</a>
+        <button type="button" class="nav-contact-btn" onclick="openContactModal()">Contact</button>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto w-full px-6 py-16 md:py-24 flex-grow">
-    <!-- Hero / About Header -->
-    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs mb-6">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>OPEN TO CYBERSECURITY & SOC ANALYST ROLES • TORONTO, CANADA</span>
+  <main class="container">
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span>OPEN TO CYBERSECURITY &amp; SOC ANALYST ROLES • TORONTO, CANADA</span>
     </div>
 
-    <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
-      Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">Sai Monisha</span>.
-    </h1>
-    <p class="mt-4 text-xl md:text-2xl font-mono text-slate-300">
-      Cybersecurity Analyst | SOC Operations | Incident Response & Vulnerability Management
-    </p>
+    <h1>Hi, I'm <span class="gradient-name">Sai Monisha</span>.</h1>
+    <p class="hero-subtitle">Cybersecurity Analyst | SOC Operations | Incident Response &amp; Vulnerability Management</p>
 
-    <div class="mt-8 grid md:grid-cols-3 gap-8 items-start">
-      <div class="md:col-span-2 space-y-4 text-slate-300 leading-relaxed text-base md:text-lg">
+    <div class="hero-grid">
+      <div class="hero-copy">
         <p>
           I am a Toronto-based Cybersecurity Analyst with 4+ years of hands-on experience protecting enterprise and hybrid cloud environments. My background spans 24/7 Security Operations Center (SOC) monitoring, threat hunting, incident response, vulnerability management, and PKI/SSL lifecycle operations.
         </p>
@@ -149,184 +604,168 @@
           From tuning Splunk, Microsoft Sentinel, and IBM QRadar correlation rules to executing web penetration tests and AWS cloud hardening, I bridge proactive defense with rapid containment and audit readiness across ISO 27001, SOC 2, PCI DSS, NIST, HIPAA, and GDPR.
         </p>
 
-        <!-- Page Navigation Buttons -->
-        <div class="pt-4 flex flex-wrap gap-3">
-          <a href="experience.html" class="px-5 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition shadow-lg shadow-sky-500/20">
-            Work Experience →
-          </a>
-          <a href="projects.html" class="px-5 py-3 rounded-lg glass-card hover:bg-slate-800 text-emerald-400 border-emerald-500/30 font-semibold text-sm transition">
-            Security Projects (6) →
-          </a>
-          <a href="certifications.html" class="px-5 py-3 rounded-lg glass-card hover:bg-slate-800 text-sky-400 border-sky-500/30 font-semibold text-sm transition">
-            Certifications & Education →
-          </a>
+        <div class="btn-row">
+          <a href="experience.html" class="btn-primary">Work Experience →</a>
+          <a href="projects.html" class="btn-secondary emerald">Security Projects (6) →</a>
+          <a href="certifications.html" class="btn-secondary sky">Certifications &amp; Education →</a>
         </div>
       </div>
 
-      <!-- Clean Profile Summary Card -->
-      <div class="p-6 rounded-xl glass-card glow-card transition text-sm space-y-3">
-        <div class="text-sky-400 border-b border-slate-800 pb-2 font-mono text-xs font-semibold uppercase tracking-wider">
-          Quick Overview
+      <aside class="card">
+        <div class="overview-title">Quick Overview</div>
+        <div class="overview-row">
+          <span class="overview-label">Location</span>
+          <span class="overview-value">Toronto, ON, Canada</span>
         </div>
-        <div class="flex justify-between gap-2">
-          <span class="text-slate-400">Location</span>
-          <span class="text-slate-100 font-medium text-right">Toronto, ON, Canada</span>
+        <div class="overview-row">
+          <span class="overview-label">Experience</span>
+          <span class="overview-value emerald">4+ Years</span>
         </div>
-        <div class="flex justify-between gap-2">
-          <span class="text-slate-400">Experience</span>
-          <span class="text-emerald-400 font-semibold text-right">4+ Years</span>
+        <div class="overview-row">
+          <span class="overview-label">Certification</span>
+          <span class="overview-value emerald">CompTIA Security+</span>
         </div>
-        <div class="flex justify-between gap-2">
-          <span class="text-slate-400">Certification</span>
-          <span class="text-emerald-400 font-semibold text-right">CompTIA Security+</span>
+        <div class="overview-row">
+          <span class="overview-label">Core Focus</span>
+          <span class="overview-value">SOC, IR, Cloud, AppSec</span>
         </div>
-        <div class="flex justify-between gap-2">
-          <span class="text-slate-400">Core Focus</span>
-          <span class="text-slate-100 font-medium text-right">SOC, IR, Cloud, AppSec</span>
+        <div class="overview-row">
+          <span class="overview-label">Scripting</span>
+          <span class="overview-value">Python, PowerShell, Bash</span>
         </div>
-        <div class="flex justify-between gap-2">
-          <span class="text-slate-400">Scripting</span>
-          <span class="text-slate-100 font-medium text-right">Python, PowerShell, Bash</span>
-        </div>
-        <div class="pt-3 border-t border-slate-800 flex items-center justify-between font-mono text-xs">
-          <a href="https://github.com/saimonisha-cybersecurity" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sky-400 hover:underline">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+
+        <div class="overview-links">
+          <a href="https://github.com/saimonisha-cybersecurity" target="_blank" rel="noopener noreferrer" class="social-link sky">
+            <svg class="icon-sm" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
             </svg>
             <span>GitHub ↗</span>
           </a>
-          <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-400 hover:underline">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+          <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="social-link emerald">
+            <svg class="icon-sm" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
             <span>LinkedIn ↗</span>
           </a>
         </div>
+      </aside>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="card">
+        <div class="metric-num sky">4+ Yrs</div>
+        <div class="metric-label">SOC &amp; InfoSec Experience</div>
+      </div>
+      <div class="card">
+        <div class="metric-num emerald">+45%</div>
+        <div class="metric-label">SIEM Alert Accuracy Boost</div>
+      </div>
+      <div class="card">
+        <div class="metric-num sky">-30%</div>
+        <div class="metric-label">Security Gap Reduction</div>
+      </div>
+      <div class="card">
+        <div class="metric-num emerald">6 Labs</div>
+        <div class="metric-label">Hands-On Security Case Studies</div>
       </div>
     </div>
 
-    <!-- Quick Metrics -->
-    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="p-5 rounded-xl glass-card glow-card transition">
-        <div class="font-mono text-2xl md:text-3xl font-bold text-sky-400">4+ Yrs</div>
-        <div class="text-xs md:text-sm text-slate-300 mt-1">SOC & InfoSec Experience</div>
-      </div>
-      <div class="p-5 rounded-xl glass-card glow-card transition">
-        <div class="font-mono text-2xl md:text-3xl font-bold text-emerald-400">+45%</div>
-        <div class="text-xs md:text-sm text-slate-300 mt-1">SIEM Alert Accuracy Boost</div>
-      </div>
-      <div class="p-5 rounded-xl glass-card glow-card transition">
-        <div class="font-mono text-2xl md:text-3xl font-bold text-sky-400">-30%</div>
-        <div class="text-xs md:text-sm text-slate-300 mt-1">Security Gap Reduction</div>
-      </div>
-      <div class="p-5 rounded-xl glass-card glow-card transition">
-        <div class="font-mono text-2xl md:text-3xl font-bold text-emerald-400">6 Labs</div>
-        <div class="text-xs md:text-sm text-slate-300 mt-1">Hands-On Security Case Studies</div>
-      </div>
-    </div>
-
-    <!-- Technical Arsenal -->
-    <section id="skills" class="mt-20 pt-16 border-t border-slate-800/80">
-      <div class="flex items-center gap-3 mb-8">
-        <span class="font-mono text-sky-400 text-sm">01.</span>
-        <h2 class="text-2xl md:text-3xl font-bold text-white">Technical Arsenal</h2>
+    <section id="skills" class="section-block">
+      <div class="section-heading">
+        <span class="section-num">01.</span>
+        <h2>Technical Arsenal</h2>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">SIEM, SOAR & Threat Intel</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">Splunk</span>
-            <span class="skill-pill">Microsoft Sentinel</span>
-            <span class="skill-pill">IBM QRadar</span>
-            <span class="skill-pill">IBM Resilient</span>
-            <span class="skill-pill">MISP</span>
-            <span class="skill-pill">ThreatConnect</span>
-            <span class="skill-pill">MITRE ATT&CK</span>
+      <div class="skills-grid">
+        <div class="card">
+          <h3 class="skill-cat-title sky">SIEM, SOAR &amp; Threat Intel</h3>
+          <div class="pills">
+            <span class="pill">Splunk</span>
+            <span class="pill">Microsoft Sentinel</span>
+            <span class="pill">IBM QRadar</span>
+            <span class="pill">IBM Resilient</span>
+            <span class="pill">MISP</span>
+            <span class="pill">ThreatConnect</span>
+            <span class="pill">MITRE ATT&amp;CK</span>
           </div>
         </div>
 
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">Endpoint Security & Forensics</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">CrowdStrike Falcon</span>
-            <span class="skill-pill">Microsoft Defender XDR</span>
-            <span class="skill-pill">Carbon Black</span>
-            <span class="skill-pill">SentinelOne</span>
-            <span class="skill-pill">Intune & SCCM</span>
-            <span class="skill-pill">Volatility</span>
-            <span class="skill-pill">FTK Imager</span>
+        <div class="card">
+          <h3 class="skill-cat-title emerald">Endpoint Security &amp; Forensics</h3>
+          <div class="pills">
+            <span class="pill">CrowdStrike Falcon</span>
+            <span class="pill">Microsoft Defender XDR</span>
+            <span class="pill">Carbon Black</span>
+            <span class="pill">SentinelOne</span>
+            <span class="pill">Intune &amp; SCCM</span>
+            <span class="pill">Volatility</span>
+            <span class="pill">FTK Imager</span>
           </div>
         </div>
 
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">Vulnerability Mgmt & Pentesting</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">Tenable Nessus</span>
-            <span class="skill-pill">Qualys VMDR</span>
-            <span class="skill-pill">Rapid7 Nexpose</span>
-            <span class="skill-pill">Burp Suite</span>
-            <span class="skill-pill">OWASP ZAP</span>
-            <span class="skill-pill">Metasploit</span>
-            <span class="skill-pill">Nmap</span>
+        <div class="card">
+          <h3 class="skill-cat-title sky">Vulnerability Mgmt &amp; Pentesting</h3>
+          <div class="pills">
+            <span class="pill">Tenable Nessus</span>
+            <span class="pill">Qualys VMDR</span>
+            <span class="pill">Rapid7 Nexpose</span>
+            <span class="pill">Burp Suite</span>
+            <span class="pill">OWASP ZAP</span>
+            <span class="pill">Metasploit</span>
+            <span class="pill">Nmap</span>
           </div>
         </div>
 
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">Cloud & Identity (IAM)</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">AWS GuardDuty</span>
-            <span class="skill-pill">AWS IAM & CloudTrail</span>
-            <span class="skill-pill">Amazon Inspector</span>
-            <span class="skill-pill">Azure Entra ID (AAD)</span>
-            <span class="skill-pill">Microsoft Purview</span>
-            <span class="skill-pill">Okta & CSPM</span>
+        <div class="card">
+          <h3 class="skill-cat-title emerald">Cloud &amp; Identity (IAM)</h3>
+          <div class="pills">
+            <span class="pill">AWS GuardDuty</span>
+            <span class="pill">AWS IAM &amp; CloudTrail</span>
+            <span class="pill">Amazon Inspector</span>
+            <span class="pill">Azure Entra ID (AAD)</span>
+            <span class="pill">Microsoft Purview</span>
+            <span class="pill">Okta &amp; CSPM</span>
           </div>
         </div>
 
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-sky-400 font-semibold text-sm mb-3">Network Security & Crypto</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">Palo Alto Firewalls</span>
-            <span class="skill-pill">Cisco ASA</span>
-            <span class="skill-pill">Snort IDS & Fail2ban</span>
-            <span class="skill-pill">UFW & IDS/IPS</span>
-            <span class="skill-pill">Wireshark</span>
-            <span class="skill-pill">PKI & SSL/TLS</span>
+        <div class="card">
+          <h3 class="skill-cat-title sky">Network Security &amp; Crypto</h3>
+          <div class="pills">
+            <span class="pill">Palo Alto Firewalls</span>
+            <span class="pill">Cisco ASA</span>
+            <span class="pill">Snort IDS &amp; Fail2ban</span>
+            <span class="pill">UFW &amp; IDS/IPS</span>
+            <span class="pill">Wireshark</span>
+            <span class="pill">PKI &amp; SSL/TLS</span>
           </div>
         </div>
 
-        <div class="p-6 rounded-xl glass-card glow-card transition">
-          <h3 class="font-mono text-emerald-400 font-semibold text-sm mb-3">GRC, Compliance & Automation</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-pill">ISO 27001</span>
-            <span class="skill-pill">SOC 2 & NIST</span>
-            <span class="skill-pill">PCI DSS & HIPAA</span>
-            <span class="skill-pill">GDPR</span>
-            <span class="skill-pill">Python & PowerShell</span>
-            <span class="skill-pill">Bash & SQL</span>
-            <span class="skill-pill">ServiceNow</span>
+        <div class="card">
+          <h3 class="skill-cat-title emerald">GRC, Compliance &amp; Automation</h3>
+          <div class="pills">
+            <span class="pill">ISO 27001</span>
+            <span class="pill">SOC 2 &amp; NIST</span>
+            <span class="pill">PCI DSS &amp; HIPAA</span>
+            <span class="pill">GDPR</span>
+            <span class="pill">Python &amp; PowerShell</span>
+            <span class="pill">Bash &amp; SQL</span>
+            <span class="pill">ServiceNow</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="scroll-mt-24 mt-20 pt-16 border-t border-slate-800/80 text-center">
-      <span class="font-mono text-sky-400 text-sm">02. Let's Connect</span>
-      <h2 class="text-3xl font-bold text-white mt-2">Get In Touch</h2>
-      <p class="text-slate-400 mt-3 max-w-xl mx-auto">
+    <section id="contact" class="section-block contact-center">
+      <span class="section-num">02. Let's Connect</span>
+      <h2>Get In Touch</h2>
+      <p>
         Actively exploring Cybersecurity Analyst, SOC Analyst, Vulnerability Management, and Cloud Security opportunities in Toronto and across Canada.
       </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="mailto:saimonishagandla91@gmail.com" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition shadow-lg shadow-sky-500/20">
-          saimonishagandla91@gmail.com
-        </a>
-        <a href="tel:+12262101437" class="px-6 py-3 rounded-lg glass-card hover:bg-slate-800 text-slate-200 font-mono text-sm transition">
-          (226) 210-1437
-        </a>
-        <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass-card hover:bg-slate-800 text-sky-400 border-sky-500/30 font-semibold transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+      <div class="contact-actions">
+        <a href="mailto:saimonishagandla91@gmail.com" class="btn-primary">saimonishagandla91@gmail.com</a>
+        <a href="tel:+12262101437" class="btn-secondary font-mono">(226) 210-1437</a>
+        <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="btn-secondary sky">
+          <svg class="icon-sm" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
           <span>LinkedIn ↗</span>
@@ -335,67 +774,56 @@
     </section>
   </main>
 
-  <footer class="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-500">
+  <footer>
     Built by Sai Monisha • Hosted on GitHub Pages
   </footer>
 
   <!-- Contact Modal -->
-  <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick="closeContactOnBackdrop(event)">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 md:p-7 shadow-2xl text-left" onclick="event.stopPropagation()">
-      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+  <div id="contact-modal" class="modal-backdrop" onclick="closeContactOnBackdrop(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
         <div>
-          <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded">DIRECT CONTACT</span>
-          <h3 class="text-xl font-bold text-white mt-2">Get In Touch</h3>
+          <div class="font-mono" style="font-size:11px;color:#34d399;">DIRECT CONTACT</div>
+          <h3 style="font-size:20px;color:#fff;margin-top:4px;">Get In Touch</h3>
         </div>
-        <button type="button" onclick="closeContactModal()" class="cursor-pointer text-slate-400 hover:text-white font-mono text-lg px-2 py-1 rounded-lg hover:bg-slate-800 transition" aria-label="Close contact modal">✕</button>
+        <button type="button" class="modal-close" onclick="closeContactModal()" aria-label="Close modal">✕</button>
       </div>
 
-      <p class="text-sm text-slate-300 mt-4 leading-relaxed">
+      <p style="font-size:14px;color:#cbd5e1;margin-top:14px;">
         Reach out regarding Cybersecurity Analyst, SOC Analyst, Vulnerability Management, or Cloud Security roles in Toronto and across Canada.
       </p>
 
-      <div class="mt-5 space-y-3 text-sm">
-        <a href="mailto:saimonishagandla91@gmail.com" class="flex items-center justify-between p-3.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 text-sky-300 transition">
-          <span class="font-mono text-xs">Email</span>
-          <span class="font-medium">saimonishagandla91@gmail.com ↗</span>
-        </a>
+      <a href="mailto:saimonishagandla91@gmail.com" class="modal-link" style="color:#7dd3fc;border-color:rgba(56,189,248,0.35);">
+        <span class="font-mono" style="font-size:12px;">Email</span>
+        <span>saimonishagandla91@gmail.com ↗</span>
+      </a>
 
-        <a href="tel:+12262101437" class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/80 hover:bg-slate-800 border border-slate-800 text-slate-200 transition">
-          <span class="font-mono text-xs text-slate-400">Phone</span>
-          <span class="font-mono text-xs">(226) 210-1437</span>
-        </a>
+      <a href="tel:+12262101437" class="modal-link">
+        <span class="font-mono" style="font-size:12px;color:#94a3b8;">Phone</span>
+        <span class="font-mono" style="font-size:12px;">(226) 210-1437</span>
+      </a>
 
-        <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 transition">
-          <span class="inline-flex items-center gap-2 font-mono text-xs">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            <span>LinkedIn</span>
-          </span>
-          <span class="font-mono text-xs">sai-monisha-gandla ↗</span>
-        </a>
-      </div>
-
-      <div class="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
-        <a href="#contact" onclick="closeContactModal()" class="text-slate-400 hover:text-sky-400 transition">Jump to bottom section ↓</a>
-        <button type="button" onclick="closeContactModal()" class="cursor-pointer text-slate-400 hover:text-white transition">Close</button>
-      </div>
+      <a href="https://www.linkedin.com/in/sai-monisha-gandla/" target="_blank" rel="noopener noreferrer" class="modal-link" style="color:#34d399;border-color:rgba(16,185,129,0.35);">
+        <span class="social-link emerald font-mono" style="font-size:12px;">
+          <svg class="icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </span>
+        <span class="font-mono" style="font-size:12px;">sai-monisha-gandla ↗</span>
+      </a>
     </div>
   </div>
 
   <script>
     function openContactModal() {
       const modal = document.getElementById('contact-modal');
-      if (!modal) return;
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      if (modal) modal.classList.add('open');
     }
 
     function closeContactModal() {
       const modal = document.getElementById('contact-modal');
-      if (!modal) return;
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      if (modal) modal.classList.remove('open');
     }
 
     function closeContactOnBackdrop(event) {
@@ -406,6 +834,5 @@
       if (e.key === 'Escape') closeContactModal();
     });
   </script>
-
 </body>
 </html>
