@@ -99,7 +99,7 @@
       pointer-events: none;
     }
 
-    /* Explicit Icon Sizing so SVGs never blow up */
+    /* Explicit Icon Sizing */
     .icon-sm {
       width: 16px;
       height: 16px;
@@ -212,6 +212,38 @@
       border-radius: 50%;
       background: #34d399;
       display: inline-block;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .hero-title-wrap {
+      flex: 1 1 540px;
+    }
+
+    .avatar-ring {
+      width: 156px;
+      height: 156px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #38bdf8, #10b981);
+      box-shadow: 0 0 32px rgba(56, 189, 248, 0.25);
+      flex-shrink: 0;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: #0b1324;
     }
 
     h1 {
@@ -408,13 +440,6 @@
       border-top: 1px solid rgba(30, 41, 59, 0.9);
     }
 
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
     .section-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
@@ -425,46 +450,6 @@
       font-size: 28px;
       font-weight: 700;
       color: #ffffff;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .skills-grid { grid-template-columns: 1fr; }
-    }
-
-    .skill-cat-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-
-    .skill-cat-title.sky { color: #38bdf8; }
-    .skill-cat-title.emerald { color: #34d399; }
-
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill {
-      padding: 5px 11px;
-      border-radius: 6px;
-      background: rgba(30, 41, 59, 0.92);
-      border: 1px solid rgba(71, 85, 105, 0.55);
-      color: #e2e8f0;
-      font-size: 12px;
-      font-weight: 500;
     }
 
     /* Contact Section */
@@ -592,8 +577,15 @@
       <span>OPEN TO CYBERSECURITY &amp; SOC ANALYST ROLES • TORONTO, CANADA</span>
     </div>
 
-    <h1>Hi, I'm <span class="gradient-name">Sai Monisha</span>.</h1>
-    <p class="hero-subtitle">Cybersecurity Analyst | SOC Operations | Incident Response &amp; Vulnerability Management</p>
+    <div class="hero-top">
+      <div class="hero-title-wrap">
+        <h1>Hi, I'm <span class="gradient-name">Sai Monisha</span>.</h1>
+        <p class="hero-subtitle">Cybersecurity Analyst | SOC Operations | Incident Response &amp; Vulnerability Management</p>
+      </div>
+      <div class="avatar-ring">
+        <img src="profile.jpg" alt="Sai Monisha" class="avatar-img" />
+      </div>
+    </div>
 
     <div class="hero-grid">
       <div class="hero-copy">
@@ -606,7 +598,7 @@
 
         <div class="btn-row">
           <a href="experience.html" class="btn-primary">Work Experience →</a>
-          <a href="projects.html" class="btn-secondary emerald">Security Projects (6) →</a>
+          <a href="projects.html" class="btn-secondary emerald">Security Projects (8) →</a>
           <a href="certifications.html" class="btn-secondary sky">Certifications &amp; Education →</a>
         </div>
       </div>
@@ -665,98 +657,13 @@
         <div class="metric-label">Security Gap Reduction</div>
       </div>
       <div class="card">
-        <div class="metric-num emerald">6 Labs</div>
+        <div class="metric-num emerald">8 Labs</div>
         <div class="metric-label">Hands-On Security Case Studies</div>
       </div>
     </div>
 
-    <section id="skills" class="section-block">
-      <div class="section-heading">
-        <span class="section-num">01.</span>
-        <h2>Technical Arsenal</h2>
-      </div>
-
-      <div class="skills-grid">
-        <div class="card">
-          <h3 class="skill-cat-title sky">SIEM, SOAR &amp; Threat Intel</h3>
-          <div class="pills">
-            <span class="pill">Splunk</span>
-            <span class="pill">Microsoft Sentinel</span>
-            <span class="pill">IBM QRadar</span>
-            <span class="pill">IBM Resilient</span>
-            <span class="pill">MISP</span>
-            <span class="pill">ThreatConnect</span>
-            <span class="pill">MITRE ATT&amp;CK</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="skill-cat-title emerald">Endpoint Security &amp; Forensics</h3>
-          <div class="pills">
-            <span class="pill">CrowdStrike Falcon</span>
-            <span class="pill">Microsoft Defender XDR</span>
-            <span class="pill">Carbon Black</span>
-            <span class="pill">SentinelOne</span>
-            <span class="pill">Intune &amp; SCCM</span>
-            <span class="pill">Volatility</span>
-            <span class="pill">FTK Imager</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="skill-cat-title sky">Vulnerability Mgmt &amp; Pentesting</h3>
-          <div class="pills">
-            <span class="pill">Tenable Nessus</span>
-            <span class="pill">Qualys VMDR</span>
-            <span class="pill">Rapid7 Nexpose</span>
-            <span class="pill">Burp Suite</span>
-            <span class="pill">OWASP ZAP</span>
-            <span class="pill">Metasploit</span>
-            <span class="pill">Nmap</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="skill-cat-title emerald">Cloud &amp; Identity (IAM)</h3>
-          <div class="pills">
-            <span class="pill">AWS GuardDuty</span>
-            <span class="pill">AWS IAM &amp; CloudTrail</span>
-            <span class="pill">Amazon Inspector</span>
-            <span class="pill">Azure Entra ID (AAD)</span>
-            <span class="pill">Microsoft Purview</span>
-            <span class="pill">Okta &amp; CSPM</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="skill-cat-title sky">Network Security &amp; Crypto</h3>
-          <div class="pills">
-            <span class="pill">Palo Alto Firewalls</span>
-            <span class="pill">Cisco ASA</span>
-            <span class="pill">Snort IDS &amp; Fail2ban</span>
-            <span class="pill">UFW &amp; IDS/IPS</span>
-            <span class="pill">Wireshark</span>
-            <span class="pill">PKI &amp; SSL/TLS</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="skill-cat-title emerald">GRC, Compliance &amp; Automation</h3>
-          <div class="pills">
-            <span class="pill">ISO 27001</span>
-            <span class="pill">SOC 2 &amp; NIST</span>
-            <span class="pill">PCI DSS &amp; HIPAA</span>
-            <span class="pill">GDPR</span>
-            <span class="pill">Python &amp; PowerShell</span>
-            <span class="pill">Bash &amp; SQL</span>
-            <span class="pill">ServiceNow</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="contact" class="section-block contact-center">
-      <span class="section-num">02. Let's Connect</span>
+      <span class="section-num">01. Let's Connect</span>
       <h2>Get In Touch</h2>
       <p>
         Actively exploring Cybersecurity Analyst, SOC Analyst, Vulnerability Management, and Cloud Security opportunities in Toronto and across Canada.
